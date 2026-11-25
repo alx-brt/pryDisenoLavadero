@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLavados));
             gboDatosDelLavado = new GroupBox();
+            btnRegistrar = new Button();
             txtVehiculos = new TextBox();
             cboServicio = new ComboBox();
             txtPatente = new TextBox();
@@ -53,13 +54,24 @@
             lblDescuento = new Label();
             lblRecargo = new Label();
             lblSubtotal = new Label();
+            dgvLavados = new DataGridView();
+            colCliente = new DataGridViewTextBoxColumn();
+            colPatente = new DataGridViewTextBoxColumn();
+            colServicio = new DataGridViewTextBoxColumn();
+            colCantidad = new DataGridViewTextBoxColumn();
+            colEntrega = new DataGridViewTextBoxColumn();
+            colFrecuencia = new DataGridViewTextBoxColumn();
+            colRecarga = new DataGridViewTextBoxColumn();
+            colTotal = new DataGridViewTextBoxColumn();
             gboDatosDelLavado.SuspendLayout();
             gboEntrega.SuspendLayout();
             gboImporte.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvLavados).BeginInit();
             SuspendLayout();
             // 
             // gboDatosDelLavado
             // 
+            gboDatosDelLavado.Controls.Add(btnRegistrar);
             gboDatosDelLavado.Controls.Add(txtVehiculos);
             gboDatosDelLavado.Controls.Add(cboServicio);
             gboDatosDelLavado.Controls.Add(txtPatente);
@@ -79,6 +91,17 @@
             gboDatosDelLavado.TabStop = false;
             gboDatosDelLavado.Text = "Datos del lavado";
             // 
+            // btnRegistrar
+            // 
+            btnRegistrar.BackColor = Color.Azure;
+            btnRegistrar.Location = new Point(228, 286);
+            btnRegistrar.Name = "btnRegistrar";
+            btnRegistrar.Size = new Size(96, 37);
+            btnRegistrar.TabIndex = 12;
+            btnRegistrar.Text = "Registrar";
+            btnRegistrar.UseVisualStyleBackColor = false;
+            btnRegistrar.Click += btnRegistrar_Click;
+            // 
             // txtVehiculos
             // 
             txtVehiculos.BackColor = Color.Azure;
@@ -87,7 +110,7 @@
             txtVehiculos.Name = "txtVehiculos";
             txtVehiculos.Size = new Size(52, 23);
             txtVehiculos.TabIndex = 11;
-            txtVehiculos.TextChanged += textBox3_TextChanged;
+            txtVehiculos.KeyPress += txtVehiculos_KeyPress;
             // 
             // cboServicio
             // 
@@ -108,6 +131,7 @@
             txtPatente.Name = "txtPatente";
             txtPatente.Size = new Size(100, 23);
             txtPatente.TabIndex = 9;
+            txtPatente.KeyPress += txtPatente_KeyPress;
             // 
             // txtCliente
             // 
@@ -121,22 +145,24 @@
             // btnLimpiar
             // 
             btnLimpiar.BackColor = Color.Azure;
-            btnLimpiar.Location = new Point(171, 286);
+            btnLimpiar.Location = new Point(123, 286);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(157, 37);
+            btnLimpiar.Size = new Size(99, 37);
             btnLimpiar.TabIndex = 7;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = false;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // btnCalcular
             // 
             btnCalcular.BackColor = Color.Azure;
-            btnCalcular.Location = new Point(8, 286);
+            btnCalcular.Location = new Point(18, 286);
             btnCalcular.Name = "btnCalcular";
-            btnCalcular.Size = new Size(157, 37);
+            btnCalcular.Size = new Size(99, 37);
             btnCalcular.TabIndex = 6;
             btnCalcular.Text = "Calcular";
             btnCalcular.UseVisualStyleBackColor = false;
+            btnCalcular.Click += btnCalcular_Click;
             // 
             // chkClienteFrecuente
             // 
@@ -208,7 +234,6 @@
             lblPatente.Size = new Size(50, 15);
             lblPatente.TabIndex = 1;
             lblPatente.Text = "Patente:";
-            lblPatente.Click += label2_Click;
             // 
             // lblCliente
             // 
@@ -308,26 +333,89 @@
             lblSubtotal.TabIndex = 0;
             lblSubtotal.Text = "Subtotal:";
             // 
+            // dgvLavados
+            // 
+            dgvLavados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvLavados.BackgroundColor = Color.Azure;
+            dgvLavados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvLavados.Columns.AddRange(new DataGridViewColumn[] { colCliente, colPatente, colServicio, colCantidad, colEntrega, colFrecuencia, colRecarga, colTotal });
+            dgvLavados.GridColor = SystemColors.InfoText;
+            dgvLavados.Location = new Point(352, 22);
+            dgvLavados.Name = "dgvLavados";
+            dgvLavados.ReadOnly = true;
+            dgvLavados.Size = new Size(436, 150);
+            dgvLavados.TabIndex = 2;
+            // 
+            // colCliente
+            // 
+            colCliente.HeaderText = "Cliente";
+            colCliente.Name = "colCliente";
+            colCliente.ReadOnly = true;
+            // 
+            // colPatente
+            // 
+            colPatente.HeaderText = "Patente";
+            colPatente.Name = "colPatente";
+            colPatente.ReadOnly = true;
+            // 
+            // colServicio
+            // 
+            colServicio.HeaderText = "Servicio";
+            colServicio.Name = "colServicio";
+            colServicio.ReadOnly = true;
+            // 
+            // colCantidad
+            // 
+            colCantidad.HeaderText = "Cantidad";
+            colCantidad.Name = "colCantidad";
+            colCantidad.ReadOnly = true;
+            // 
+            // colEntrega
+            // 
+            colEntrega.HeaderText = "Entrega";
+            colEntrega.Name = "colEntrega";
+            colEntrega.ReadOnly = true;
+            // 
+            // colFrecuencia
+            // 
+            colFrecuencia.HeaderText = "Frec.";
+            colFrecuencia.Name = "colFrecuencia";
+            colFrecuencia.ReadOnly = true;
+            // 
+            // colRecarga
+            // 
+            colRecarga.HeaderText = "Recargo";
+            colRecarga.Name = "colRecarga";
+            colRecarga.ReadOnly = true;
+            // 
+            // colTotal
+            // 
+            colTotal.HeaderText = "Total";
+            colTotal.Name = "colTotal";
+            colTotal.ReadOnly = true;
+            // 
             // frmLavados
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
-            ClientSize = new Size(358, 521);
+            ClientSize = new Size(800, 521);
+            Controls.Add(dgvLavados);
             Controls.Add(gboImporte);
             Controls.Add(gboDatosDelLavado);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "frmLavados";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Lavadero Los Andes - Calculo de Servicio";
-            Load += frmLavados_Load;
             gboDatosDelLavado.ResumeLayout(false);
             gboDatosDelLavado.PerformLayout();
             gboEntrega.ResumeLayout(false);
             gboEntrega.PerformLayout();
             gboImporte.ResumeLayout(false);
             gboImporte.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvLavados).EndInit();
             ResumeLayout(false);
         }
 
@@ -357,5 +445,15 @@
         private Label lblDescuento;
         private Label lblRecargo;
         private Label lblSubtotal;
+        private DataGridView dgvLavados;
+        private DataGridViewTextBoxColumn colCliente;
+        private DataGridViewTextBoxColumn colPatente;
+        private DataGridViewTextBoxColumn colServicio;
+        private DataGridViewTextBoxColumn colCantidad;
+        private DataGridViewTextBoxColumn colEntrega;
+        private DataGridViewTextBoxColumn colFrecuencia;
+        private DataGridViewTextBoxColumn colRecarga;
+        private DataGridViewTextBoxColumn colTotal;
+        private Button btnRegistrar;
     }
 }
