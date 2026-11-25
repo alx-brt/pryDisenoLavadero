@@ -91,7 +91,7 @@
             // 
             // cboServicio
             // 
-            cboServicio.BackColor = Color.Azure;
+            cboServicio.BackColor = Color.LightCyan;
             cboServicio.DropDownStyle = ComboBoxStyle.DropDownList;
             cboServicio.FormattingEnabled = true;
             cboServicio.Items.AddRange(new object[] { "Lavado exterior", "Lavado completo", "Lavado con encerado" });
@@ -162,13 +162,14 @@
             // rbnExpress
             // 
             rbnExpress.AutoSize = true;
+            rbnExpress.BackColor = Color.LightCyan;
             rbnExpress.Location = new Point(153, 22);
             rbnExpress.Name = "rbnExpress";
             rbnExpress.Size = new Size(104, 19);
             rbnExpress.TabIndex = 1;
             rbnExpress.TabStop = true;
             rbnExpress.Text = "Express (+25%)";
-            rbnExpress.UseVisualStyleBackColor = true;
+            rbnExpress.UseVisualStyleBackColor = false;
             // 
             // rbnNormal
             // 
